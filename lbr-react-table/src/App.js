@@ -24,6 +24,13 @@ class App extends Component {
     })
   }
 
+  deleteRow(id){
+    const index = this.state.posts.findIndex(post => {
+      return post.id === id
+    })
+    console.log("index", index)
+  }
+
   render() {
     const columns = [
       {
@@ -63,7 +70,9 @@ class App extends Component {
         Header: "Actions",
         Cell: props => {
           return (
-            <button style={{backgroundColor: "red", color: "white"
+            <button style={{backgroundColor: "red", color: "white"}}
+          onClick={() => {
+            this.deleteRow(props.original.id);
           }}
           >Delete</button>
           )
