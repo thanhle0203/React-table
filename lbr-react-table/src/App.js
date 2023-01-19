@@ -58,6 +58,21 @@ class App extends Component {
         accessor: "body",
         sortable: false,
         filterable: false
+      },
+      {
+        Header: "Actions",
+        Cell: props => {
+          return (
+            <button style={{backgroundColor: "red", color: "white"
+          }}
+          >Delete</button>
+          )
+        },
+        sortable: false,
+        filterable: false,
+        width: 100,
+        maxWidth: 100,
+        minWidth: 100
       }
     ]
     return (
