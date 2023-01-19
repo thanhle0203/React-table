@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './App.css';
 import ReactTable from "react-table-6";  
 import "react-table-6/react-table.css" 
+import ExportToExcel from './ExportToExcel';
 
 class App extends Component {
 
@@ -86,13 +87,27 @@ class App extends Component {
     ]
     return (
       <ReactTable
+        className='-striped -highlight'
         columns={columns}
         data={this.state.posts}
         filterable
         defaultPageSize={10}
         noDataText={"Please Wait...!"}
-      
-       />
+       >
+
+       {(state, filtredData, instance) => {
+        this.reactTable = state.pageRows.map(post => {
+          return post._original
+        });
+        return (
+          <div>
+            {filtredData()}
+            <ExportToExcel posts={this.reactTable} />
+          </div>
+        )
+       }}
+
+       </ReactTable>
     )
   };
 }
