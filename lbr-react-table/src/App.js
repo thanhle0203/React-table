@@ -28,11 +28,13 @@ class App extends Component {
   deleteRow(id){
     const index = this.state.posts.findIndex(post => {
       return post.id === id
-    })
-    console.log("index", index)
+    });
+    this.state.posts.splice(index, 1);
+    this.setState({posts: this.state.posts})
   }
 
   render() {
+    const data = this.state.posts;
     const columns = [
       {
         Header: "User ID",
@@ -72,7 +74,7 @@ class App extends Component {
         Cell: props => {
           return (
             <button style={{backgroundColor: "red", color: "white"}}
-          onClick={() => {
+          onClick={(e) => {
             this.deleteRow(props.original.id);
           }}
           >Delete</button>
@@ -89,10 +91,9 @@ class App extends Component {
       <ReactTable
         className='-striped -highlight'
         columns={columns}
-        data={this.state.posts}
+        data={data}
         filterable
         defaultPageSize={10}
-        noDataText={"Please Wait...!"}
        >
 
        {(state, filtredData, instance) => {
